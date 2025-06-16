@@ -25,7 +25,7 @@ export interface Note {
 }
 
 // In-memory storage (temporary solution)
-let projects: Project[] = [
+const projects: Project[] = [
   {
     id: 'PRJ-001',
     name: 'Greens Aeration - Holes 1-9',

@@ -19,25 +19,6 @@ interface Project {
   photos?: any[];
 }
 
-interface Note {
-  id: number;
-  projectId: string;
-  text: string;
-  author: string;
-  timestamp: string;
-}
-
-interface AuditEntry {
-  id: number;
-  projectId: string;
-  action: string;
-  field: string | null;
-  oldValue: string | null;
-  newValue: string | null;
-  userId: string;
-  timestamp: string;
-}
-
 // Error Boundary Component - Add this before DatabaseManager class
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -1002,7 +983,7 @@ const handleDeletePhoto = async (photoId) => {
   }
 };
 
-const formatFileSize = (bytes) => {
+const formatFileSize = (bytes: number) => {
   if (bytes === 0) return '0 Bytes';
   const k = 1024;
   const sizes = ['Bytes', 'KB', 'MB', 'GB'];
@@ -1014,7 +995,7 @@ const formatFileSize = (bytes) => {
     if (!selectedProject || !db) return;
 
     try {
-      const updatedProject = await db.updateProject(selectedProject.id, { photos });
+      await db.updateProject(selectedProject.id, { photos });
       
       const updatedProjects = projects.map(p =>
         p.id === selectedProject.id ? { ...p, photos } : p
